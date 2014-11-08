@@ -1,0 +1,25 @@
+{
+  "name": "todue-txt",
+  "version": "0.0.0",
+  "description": "Scan and send notification of tasks that are due",
+  "main": "index.js",
+  "bin": {
+    "todue": "bin/todue.js"
+  },
+  "scripts": {
+    "test": "mocha -R spec"
+  },
+  "author": "Devin Weaver <suki@tritarget.org> (http://tritarget.org/)",
+  "license": "GPLv3",
+  "devDependencies": {
+    "chai": "^1.9.2",
+    "mocha": "^2.0.1",
+    "sinon": "^1.11.1"
+  },
+  "dependencies": {
+    "event-stream": "^3.1.7",
+    "moment": "^2.8.3",
+    "node-prowl": "^0.1.7",
+    "through2": "^0.6.3"
+  }
+}
