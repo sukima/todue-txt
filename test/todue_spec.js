@@ -7,6 +7,7 @@ var es      = require('event-stream');
 var stream  = require('stream');
 var through = require('through2');
 var moment  = require('moment');
+var Prowl   = require('node-prowl');
 var ToDue   = require('..');
 
 chai.Assertion.addMethod('afterDate', function(date) {
@@ -25,10 +26,10 @@ var check = function(callback, expectations, args) {
   return function() {
     try {
       expectations(args && args());
-      callback();
     } catch (err) {
       callback(err);
     }
+    callback();
   };
 };
 
@@ -122,15 +123,22 @@ describe('filterComplete', function() {
 describe('sendToProwl', function() {
   beforeEach(function() {
     this.testStream = getFixtureData('sendtoprowltodos');
-    this.prowl = sinon.stub();
+    this.prowl = new Prowl('12345');
   });
 
   it('sends a todo message to the prowl API', function(done) {
-    var prowl      = {push: sinon.mock().twice().callsArg(3)};
-    this.testStream.pipe(ToDue.sendToProwl(prowl))
-    .once('error', done)
-    .once('finish', check(done, function() {
-      prowl.push.verify();
-    }));
+    var prowlMessageMatch = sinon.match
+      .has('description', sinon.match.string)
+      .and(sinon.match.has('priority', sinon.match.number));
+
+    var pushSpy = sinon.mock(this.prowl)
+      .expects('push')
+      .callsArg(3)
+      .withArgs(sinon.match.string, sinon.match.string, prowlMessageMatch)
+      .twice();
+
+    this.testStream.pipe(ToDue.sendToProwl(this.prowl))
+    .once('finish', check(done, function() { pushSpy.verify(); }))
+    .once('error', done);
   });
 });
