@@ -8,7 +8,7 @@ var stream  = require('stream');
 var through = require('through2');
 var moment  = require('moment');
 var Prowl   = require('node-prowl');
-var ToDue   = require('..');
+var ToDue   = require('../lib/todue');
 
 chai.Assertion.addMethod('afterDate', function(date) {
   var obj = moment(this._obj);

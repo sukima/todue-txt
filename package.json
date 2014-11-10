@@ -2,7 +2,7 @@
   "name": "todue-txt",
   "version": "0.0.0",
   "description": "Scan and send notification of tasks that are due",
-  "main": "index.js",
+  "main": "lib/todue.js",
   "bin": {
     "todue": "bin/todue.js"
   },
