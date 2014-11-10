@@ -120,6 +120,34 @@ describe('filterComplete', function() {
   });
 });
 
+describe('todoProwlDesc', function() {
+  beforeEach(function() {
+    this.mockTodo = {
+      'description': 'foobar',
+      'contexts': [],
+      'projects': []
+    };
+  });
+
+  it('returns a string', function() {
+    expect(ToDue.todoProwlDesc(this.mockTodo)).to.be.a.string;
+    this.mockTodo.priority = 'A';
+    expect(ToDue.todoProwlDesc(this.mockTodo)).to.be.a.string;
+  });
+});
+
+describe('prowlPriority', function() {
+  beforeEach(function() {
+    this.testCases = ['A', 'B', 'C', 'D', 'E', 'F', null, ''];
+  });
+
+  it('returns a valid Prowl priority number', function() {
+    this.testCases.forEach(function (pri) {
+      expect(ToDue.prowlPriority(pri)).to.be.at.least(-2).and.at.most(2);
+    });
+  });
+});
+
 describe('sendToProwl', function() {
   beforeEach(function() {
     this.testStream = getFixtureData('sendtoprowltodos');
