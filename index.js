@@ -5,7 +5,7 @@ var through = require('through2');
 var moment  = require('moment');
 var Prowl   = require('node-prowl');
 
-exports.todoParse = function() {
+exports.todoParse = function todoParse() {
   var parse = through.obj(function(data, enc, callback) {
     if (!data) {
       this.push(null);
@@ -42,7 +42,7 @@ exports.todoParse = function() {
   return es.split().pipe(parse);
 };
 
-exports.filterByDueDate = function(dueOnDate) {
+exports.filterByDueDate = function filterComplete(dueOnDate) {
   dueOnDate = (dueOnDate != null) ? moment(dueOnDate) : moment();
   return es.map(function(data, callback) {
     var due = data.due && moment(data.due);
@@ -55,7 +55,7 @@ exports.filterByDueDate = function(dueOnDate) {
   });
 };
 
-exports.filterComplete = function() {
+exports.filterComplete = function filterComplete() {
   return es.map(function(data, callback) {
     if (data.complete) {
       callback();
@@ -65,16 +65,16 @@ exports.filterComplete = function() {
   });
 };
 
-function todoProwlDesc(todo) {
+exports.todoProwlDesc = function todoProwlDesc(todo) {
   var priority = todo.priority && todo.priority.toUpperCase();
   if (priority) {
     return util.format('(%s) %s', priority, todo.description);
   } else {
     return todo.description;
   }
-}
+};
 
-function prowlPriority(priority) {
+exports.prowlPriority = function prowlPriority(priority) {
   switch (priority && priority.toUpperCase()) {
     case 'A': return 2;
     case 'B': return 1;
@@ -83,15 +83,15 @@ function prowlPriority(priority) {
     case 'E': return -2;
     default:  return 0;
   }
-}
+};
 
-exports.sendToProwl = function(apiKey) {
+exports.sendToProwl = function sendToProwl(apiKey) {
   var prowl = (typeof apiKey === 'string') ? new Prowl(apiKey) : apiKey;
   var prowlStream = new stream.Writable({objectMode: true});
   prowlStream._write = function(todo, enc, callback) {
     var options = {
-      description: todoProwlDesc(todo),
-      priority:    prowlPriority(todo.priority)
+      description: exports.todoProwlDesc(todo),
+      priority:    exports.prowlPriority(todo.priority)
     };
     prowl.push('Due Today', 'todo.txt', options, callback);
   };
