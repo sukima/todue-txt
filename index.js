@@ -42,7 +42,7 @@ exports.todoParse = function todoParse() {
   return es.split().pipe(parse);
 };
 
-exports.filterByDueDate = function filterComplete(dueOnDate) {
+exports.filterByDueDate = function filterByDueDate(dueOnDate) {
   dueOnDate = (dueOnDate != null) ? moment(dueOnDate) : moment();
   return es.map(function(data, callback) {
     var due = data.due && moment(data.due);
