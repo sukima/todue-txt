@@ -5,13 +5,13 @@ var pkg   = require('../package.json');
 var ToDue = require('../lib/todue');
 
 var yargs = require('yargs')
-  .usage('Usage: $0 [--api KEY] [FILE]\nFILE defaults to $TODO_FILE environment variable or STDIN.')
-  .example('$0 -a 12345 -', 'Read STDIN for todo list.')
-  .example('$0 -a 12345 ~/todo/todo.txt', 'Use ~/todo/todo.txt for list of todos.')
+  .usage('Usage: $0 [--api KEY] [FILE]\nFILE defaults to $TODO_FILE environment variable or STDIN')
+  .example('$0 -a 12345 -', 'Read STDIN for todo list')
+  .example('$0 -a 12345 ~/todo/todo.txt', 'Use ~/todo/todo.txt for list of todos')
   .describe('api', 'Set the Prowl service API key to KEY. (or use $PROWL_API_KEY environemnt variable)')
   .alias('api', 'a')
   .alias('dry-run', 'n')
-  .describe('dry-run', 'Don\'t actually submit to Prowl service.')
+  .describe('dry-run', 'Don\'t actually submit to Prowl service')
   .version(pkg.version, 'version')
   .alias('version', 'v')
   .help('help')
