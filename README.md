@@ -9,6 +9,8 @@ streams. It is very likely this could have been easily done in a shell script.
 
 ## Project Setup
 
+Node.js Version 0.10+
+
 This tool requires a valid [Prowl API key](http://www.prowlapp.com/api.php).
 
     $ npm install -g todue-txt
