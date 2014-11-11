@@ -1,8 +1,10 @@
 # ToDue [![Build Status](https://secure.travis-ci.org/sukima/todue-txt.png?branch=master)](https://travis-ci.org/sukima/todue-txt)
 
-Scan your [todo.txt](http://todotxt.com/) finding any due tasks and sends those tasks to [Prowl][].
+Scan your [todo.txt](http://todotxt.com/) finding any due tasks and sends those
+tasks to [Prowl][].
 
-This is meant to be used from a cron job but could easily be used in other ways.
+This is meant to be used from a cron job but could easily be used in other
+ways.
 
 ## Project Setup
 
@@ -11,7 +13,8 @@ This tool requires a valid [Prowl API key](http://www.prowlapp.com/api.php).
     $ npm install -g todue-txt
     $ todue --help
 
-The `todue` command takes a file name as an argument or can read from STDIN (aka "-" as the file name).
+The `todue` command takes a file name as an argument or can read from STDIN
+(aka "-" as the file name).
 
 #### Arguments
 
@@ -24,7 +27,8 @@ The `todue` command takes a file name as an argument or can read from STDIN (aka
 
 #### Environment Variables
 
-The following environment variables can be set in lieu of the above command line arguments:
+The following environment variables can be set in lieu of the above command
+line arguments:
 
 | Variable        | Description                   |
 |-----------------|-------------------------------|
