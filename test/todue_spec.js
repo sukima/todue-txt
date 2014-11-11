@@ -48,7 +48,8 @@ var getFixturePath = function(todoName) {
 };
 
 var getFixtureStream = function(todoName) {
-  return fs.createReadStream(getFixturePath(todoName + '.txt'));
+  return fs.createReadStream(getFixturePath(todoName + '.txt'))
+    .pipe(ToDue.split());
 };
 
 var getFixtureData = function(todoName) {
@@ -58,7 +59,7 @@ var getFixtureData = function(todoName) {
 
 describe('todoParse', function() {
   beforeEach(function() {
-    this.testStream = getFixtureStream('todoparse').pipe(es.split());
+    this.testStream = getFixtureStream('todoparse');
   });
 
   it('converts a text stream to stream of todo objects', function(done) {

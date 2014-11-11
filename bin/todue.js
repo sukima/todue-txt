@@ -55,6 +55,7 @@ if (todoFile === '-') {
 }
 
 todoStream
+  .pipe(ToDue.split())
   .pipe(ToDue.todoParse())
   .pipe(ToDue.filterComplete())
   .pipe(ToDue.filterByDueDate())
