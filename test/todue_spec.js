@@ -26,21 +26,21 @@ var check = function(callback, expectations, args) {
   return function() {
     try {
       expectations(args && args());
+      callback();
     } catch (err) {
       callback(err);
     }
-    callback();
   };
 };
 
-var checkStream = function(callback, expectations) {
+var checkStream = function(done, expectations) {
   var results = [];
   return through.obj(function(chunk, enc, callback) {
     results.push(chunk);
     this.push(chunk);
     callback();
-  }, check(callback, expectations, function() { return results; }))
-  .once('error', callback);
+  }, check(done, expectations, function() { return results; }))
+  .once('error', done);
 };
 
 var getFixturePath = function(todoName) {
