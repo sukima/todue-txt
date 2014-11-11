@@ -1,8 +1,22 @@
 {
   "name": "todue-txt",
   "version": "1.0.0",
-  "description": "Scan and send notification of tasks that are due",
+  "description": "Scan todo.txt and notify Prowl of tasks that are due",
   "main": "lib/todue.js",
+  "preferGlobal": true,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/sukima/todue-txt.git"
+  },
+  "bugs": {
+    "url": "https://github.com/sukima/todue-txt/issues"
+  },
+  "keywords": [
+    "todo",
+    "todotxt",
+    "todo.txt",
+    "todotxt-plugin"
+  ],
   "bin": {
     "todue": "bin/todue.js"
   },
