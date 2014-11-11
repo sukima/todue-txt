@@ -4,7 +4,8 @@ Scan your [todo.txt](http://todotxt.com/) finding any due tasks and sends those
 tasks to [Prowl][].
 
 This is meant to be used from a cron job but could easily be used in other
-ways.
+ways. It was written in [node](http://nodejs.org/) as an exercise in using text
+streams. It is very likely this could have been easily done in a shell script.
 
 ## Project Setup
 
